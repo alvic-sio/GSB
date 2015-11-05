@@ -1,6 +1,6 @@
 package gsb.modele;
 
-public class Medecin {
+public class medecin {
 	protected String codeMed ;
 	protected String nom;
 	protected String prenom;
@@ -20,7 +20,7 @@ public class Medecin {
 	 * @param potentiel
 	 * @param specialite
 	 */
-	public Medecin(String codeMed, String nom, String prenom,
+	public medecin(String codeMed, String nom, String prenom,
 			String adresse, String telephone,
 			String potentiel, String specialite,String codePostal,String ville) {
 		this.codeMed = codeMed;
