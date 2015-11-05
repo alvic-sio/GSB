@@ -2,7 +2,7 @@ package gsb.modele;
 
 import java.util.Date;
 
-public class visite {
+public class Visite {
 	
 	protected String reference;
 	protected Date date;
@@ -10,7 +10,7 @@ public class visite {
 	protected Medecin unMedecin;
 	protected Visiteur unVisiteur;
 	
-	public visite(String reference, Date date, String commentaire,
+	public Visite(String reference, Date date, String commentaire,
 			Medecin unMedecin, Visiteur unVisiteur) {
 		
 		this.reference = reference;
