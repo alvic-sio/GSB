@@ -1,8 +1,8 @@
 package gsb.modele.dao;
 
-import java.sql.ResultSet;
-
 import gsb.modele.Medicament;
+
+import java.sql.ResultSet;
 
 public class MedicamentDao {
 	
@@ -54,7 +54,6 @@ public class MedicamentDao {
 		int retourVal = 1;
 	
 		if(medicamentExiste(medicament.getDepotLegal())){
-			System.err.println("Erreur insert medicament : Le medicament existe déja en base de données");
 			retourVal = 1;
 		} else {
 
@@ -78,6 +77,7 @@ public class MedicamentDao {
 			
 			try {
 				retourVal = ConnexionMySql.execReqMaj(requete);
+				ConnexionMySql.fermerConnexionBd();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}		
@@ -104,6 +104,7 @@ public class MedicamentDao {
 			if(res.next()){
 				existe = true;
 			}
+			ConnexionMySql.fermerConnexionBd();
 
 		} catch (Exception e) {
 			e.printStackTrace();
