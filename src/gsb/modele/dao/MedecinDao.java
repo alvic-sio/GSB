@@ -10,18 +10,17 @@ import java.util.HashMap;
 
 
 
-/**
- * @author Isabelle
- * 22 févr. 2015
- * TODO Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre - Préférences - Java - Style de code - Modèles de code
- */
+
 public class MedecinDao {
 	
 	public static Medecin rechercher(String codeMedecin){
 		Medecin unMedecin=null;
+		/**
+		 *requete de selection d'un medecin et d'une ville se trouvant dans localité
+		 */
 		String req = "select * from medecin,localite where medecin.CODEPOSTAL = localite.CODEPOSTAL and CODEMED ='"+codeMedecin+"'";
 		System.out.println(req);
+		//connection a la base de donnée
 		ResultSet reqSelection = ConnexionMySql.execReqSelection(req);
 				System.out.println();
 		try {
@@ -35,7 +34,9 @@ public class MedecinDao {
 		ConnexionMySql.fermerConnexionBd();
 		return unMedecin;
 	}
-	
+	/**
+	 * permet de rechercher un medecin grace au code du medecin passé en paramètre
+	 */
 	public static ArrayList<Medecin> retournerCollectionDesMedecins(){
 		ArrayList<Medecin> collectionDesMedecins = new ArrayList<Medecin>();
 		ResultSet reqSelection = ConnexionMySql.execReqSelection("select CODEMED from MEDECIN");
@@ -109,11 +110,6 @@ public class MedecinDao {
 		ConnexionMySql.fermerConnexionBd();
 		return result;	
 	}
-	/**
-	 * @param Medecin
-	 * @return 1 si la modification s'est bien déroulée, 0 sinon
-	 * methode qui permet de modificer les valeurs d'un enregistrement dans la table Medecin correspondant au CODEMED passé en paramètre
-	 */
 
 	
 

@@ -8,7 +8,7 @@ import gsb.modele.dao.MedecinDao;
 public class MedecinDaoTest {
 	public static void main(String[] args) {
 		
-		
+		//test de recherche d'un medecin passé en paramètre
 		Medecin unMedecin = MedecinDao.rechercher("m001");
 		System.out.println(unMedecin.getCodeMed());
 		System.out.println(unMedecin.getNom());
@@ -20,7 +20,8 @@ public class MedecinDaoTest {
 		System.out.println(unMedecin.getSpecialite());
 		System.out.println(unMedecin.getVille());
 		
-
+		
+		//test de creation d'un nouveau medecin avec les attributs passés en paramètre
 		Medecin unNouveauMedecin= new Medecin("m022", "henry", "hector" , "10 rue des plantes", "02-56-56-68-78", "" , "jambonniste", "56800","");
 		System.out.println(MedecinDao.creer(unNouveauMedecin));
 		
