@@ -51,7 +51,7 @@ public class MedicamentDao {
 	 * @return 1 si la création s'est bien passé, 0 sinon
 	 */
 	public static int creer(Medicament medicament){
-		int retourVal = 1;
+		int retourVal = 0;
 	
 		if(medicamentExiste(medicament.getDepotLegal())){
 			retourVal = 1;
@@ -64,7 +64,6 @@ public class MedicamentDao {
 			String ContreIndic	= medicament.getContreIndication();
 			float prixEchant	= medicament.getPrixEchantillon();
 			String codeFamille	= medicament.getCodeFamille();
-			String libelleFam	= medicament.getLibellefamille();
 			
 			String requete = "insert into medicament values("
 					+"'"+depotLegal	+"' ,"
@@ -84,20 +83,44 @@ public class MedicamentDao {
 			
 		}
 		
-		
 		return retourVal;
 	}
 	
 	
 	/**
+	 * Supprime un medicament de la base de données
+	 * @param depotLegal
+	 * @return 1 si suppression bien déroulée, 0 sinon
+	 */
+	public static int supprimer(String depotLegal){
+		
+		int retourVal = 0;
+		
+		if(medicamentExiste(depotLegal)){
+			String requete = "DELETE FROM medicament where MED_DEPOTLEGAL='"+depotLegal+"';";
+			try {
+				retourVal = ConnexionMySql.execReqMaj(requete);
+				ConnexionMySql.fermerConnexionBd();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			retourVal = 0;
+		}
+		
+		
+		return retourVal;
+	}
+	
+	/**
 	 * Retourne si un medicament existe dans la base de données ou non
-	 * @param depoLegal
+	 * @param depotLegal
 	 * @return true si existe, false sinon
 	 */
-	public static boolean medicamentExiste(String depoLegal){
+	public static boolean medicamentExiste(String depotLegal){
 		boolean existe = false;
 		
-		String req = "select MED_DEPOTLEGAL from medicament where MED_DEPOTLEGAL='"+depoLegal+"'";
+		String req = "select MED_DEPOTLEGAL from medicament where MED_DEPOTLEGAL='"+depotLegal+"'";
 		
 		try {
 			ResultSet res = ConnexionMySql.execReqSelection(req);
@@ -112,6 +135,5 @@ public class MedicamentDao {
 		
 		return existe;
 	}
-	
 
 }
