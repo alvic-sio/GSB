@@ -3,6 +3,7 @@ package gsb.modele.dao;
 import gsb.modele.Medicament;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class MedicamentDao {
 	
@@ -32,7 +33,7 @@ public class MedicamentDao {
 						res.getString(6), // contreIndication
 						res.getFloat(7),  // prixEchantillon
 						res.getString(3), // codeFamille
-						res.getString(8)  // libelleFamille
+						res.getString(9)  // libelleFamille
 					);
 			}
 			
@@ -134,6 +135,40 @@ public class MedicamentDao {
 		}
 		
 		return existe;
+	}
+	
+	/**
+	 * @return medicaments la liste des medicaments
+	 */
+	public static ArrayList<Medicament> getLesMedicaments(){
+		
+		ArrayList<Medicament> medicaments = null;
+		
+		try {
+			medicaments = new ArrayList<Medicament>();
+			String requete = "select * from medicament, famille where medicament.FAM_CODE = famille.FAM_CODE";
+			ResultSet res = ConnexionMySql.execReqSelection(requete);
+
+			while(res.next()){
+				medicaments.add(new Medicament(
+						res.getString(1), // depotLegal
+						res.getString(2), // nomCommercial
+						res.getString(4), // composition
+						res.getString(5), // effets
+						res.getString(6), // contreIndication
+						res.getFloat(7),  // prixEchantillon
+						res.getString(3), // codeFamille
+						res.getString(9)  // libelleFamille
+					));
+			}
+			
+			ConnexionMySql.fermerConnexionBd();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return medicaments;
 	}
 
 }
