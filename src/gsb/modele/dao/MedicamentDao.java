@@ -3,6 +3,7 @@ package gsb.modele.dao;
 import gsb.modele.Medicament;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class MedicamentDao {
 	
@@ -32,7 +33,7 @@ public class MedicamentDao {
 						res.getString(6), // contreIndication
 						res.getFloat(7),  // prixEchantillon
 						res.getString(3), // codeFamille
-						res.getString(8)  // libelleFamille
+						res.getString(9)  // libelleFamille
 					);
 			}
 			
@@ -51,7 +52,7 @@ public class MedicamentDao {
 	 * @return 1 si la création s'est bien passé, 0 sinon
 	 */
 	public static int creer(Medicament medicament){
-		int retourVal = 1;
+		int retourVal = 0;
 	
 		if(medicamentExiste(medicament.getDepotLegal())){
 			retourVal = 1;
@@ -64,7 +65,6 @@ public class MedicamentDao {
 			String ContreIndic	= medicament.getContreIndication();
 			float prixEchant	= medicament.getPrixEchantillon();
 			String codeFamille	= medicament.getCodeFamille();
-			String libelleFam	= medicament.getLibellefamille();
 			
 			String requete = "insert into medicament values("
 					+"'"+depotLegal	+"' ,"
@@ -84,20 +84,44 @@ public class MedicamentDao {
 			
 		}
 		
-		
 		return retourVal;
 	}
 	
 	
 	/**
+	 * Supprime un medicament de la base de données
+	 * @param depotLegal
+	 * @return 1 si suppression bien déroulée, 0 sinon
+	 */
+	public static int supprimer(String depotLegal){
+		
+		int retourVal = 0;
+		
+		if(medicamentExiste(depotLegal)){
+			String requete = "DELETE FROM medicament where MED_DEPOTLEGAL='"+depotLegal+"';";
+			try {
+				retourVal = ConnexionMySql.execReqMaj(requete);
+				ConnexionMySql.fermerConnexionBd();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			retourVal = 0;
+		}
+		
+		
+		return retourVal;
+	}
+	
+	/**
 	 * Retourne si un medicament existe dans la base de données ou non
-	 * @param depoLegal
+	 * @param depotLegal
 	 * @return true si existe, false sinon
 	 */
-	public static boolean medicamentExiste(String depoLegal){
+	public static boolean medicamentExiste(String depotLegal){
 		boolean existe = false;
 		
-		String req = "select MED_DEPOTLEGAL from medicament where MED_DEPOTLEGAL='"+depoLegal+"'";
+		String req = "select MED_DEPOTLEGAL from medicament where MED_DEPOTLEGAL='"+depotLegal+"'";
 		
 		try {
 			ResultSet res = ConnexionMySql.execReqSelection(req);
@@ -113,5 +137,38 @@ public class MedicamentDao {
 		return existe;
 	}
 	
+	/**
+	 * @return medicaments la liste des medicaments
+	 */
+	public static ArrayList<Medicament> getLesMedicaments(){
+		
+		ArrayList<Medicament> medicaments = null;
+		
+		try {
+			medicaments = new ArrayList<Medicament>();
+			String requete = "select * from medicament, famille where medicament.FAM_CODE = famille.FAM_CODE";
+			ResultSet res = ConnexionMySql.execReqSelection(requete);
+
+			while(res.next()){
+				medicaments.add(new Medicament(
+						res.getString(1), // depotLegal
+						res.getString(2), // nomCommercial
+						res.getString(4), // composition
+						res.getString(5), // effets
+						res.getString(6), // contreIndication
+						res.getFloat(7),  // prixEchantillon
+						res.getString(3), // codeFamille
+						res.getString(9)  // libelleFamille
+					));
+			}
+			
+			ConnexionMySql.fermerConnexionBd();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return medicaments;
+	}
 
 }
