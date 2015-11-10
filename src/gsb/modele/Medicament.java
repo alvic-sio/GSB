@@ -9,7 +9,7 @@ public class Medicament {
 	protected String contreIndication;
 	protected float prixEchantillon;
 	protected String codeFamille;
-	protected String libellefamille;
+	protected String libelleFamille;
 	
 	/**
 	 * @param depotLegal
@@ -33,7 +33,7 @@ public class Medicament {
 		this.contreIndication = contreIndication;
 		this.prixEchantillon = prixEchantillon;
 		this.codeFamille = codeFamille;
-		this.libellefamille = libellefamille;
+		this.libelleFamille = libellefamille;
 	}
 
 	public String getDepotLegal() {
@@ -93,11 +93,11 @@ public class Medicament {
 	}
 
 	public String getLibellefamille() {
-		return libellefamille;
+		return libelleFamille;
 	}
 
 	public void setLibellefamille(String libellefamille) {
-		this.libellefamille = libellefamille;
+		this.libelleFamille = libellefamille;
 	}
 
 	
