@@ -53,36 +53,34 @@ public class MedicamentDao {
 	 */
 	public static int creer(Medicament medicament){
 		int retourVal = 0;
-	
-		if(medicamentExiste(medicament.getDepotLegal())){
-			retourVal = 1;
-		} else {
 
-			String depotLegal 	= medicament.getDepotLegal();
-			String nomCom		= medicament.getNomCommercial();
-			String compo		= medicament.getComposition();
-			String effets		= medicament.getEffets();
-			String ContreIndic	= medicament.getContreIndication();
-			float prixEchant	= medicament.getPrixEchantillon();
-			String codeFamille	= medicament.getCodeFamille();
-			
-			String requete = "insert into medicament values("
-					+"'"+depotLegal	+"' ,"
-					+"'"+nomCom		+"' ,"
-					+"'"+codeFamille+"' ,"
-					+"'"+compo		+"' ,"
-					+"'"+effets		+"' ,"
-					+"'"+ContreIndic+"' ,"
-					+"'"+prixEchant	+"' );";
-			
-			try {
-				retourVal = ConnexionMySql.execReqMaj(requete);
-				ConnexionMySql.fermerConnexionBd();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}		
-			
+		String depotLegal 	= medicament.getDepotLegal();
+		String nomCom		= medicament.getNomCommercial();
+		String compo		= medicament.getComposition();
+		String effets		= medicament.getEffets();
+		String ContreIndic	= medicament.getContreIndication();
+		float prixEchant	= medicament.getPrixEchantillon();
+		String codeFamille	= medicament.getCodeFamille();
+		
+		String requete = "insert into medicament values("
+				+"'"+depotLegal	+"' ,"
+				+"'"+nomCom		+"' ,"
+				+"'"+codeFamille+"' ,"
+				+"'"+compo		+"' ,"
+				+"'"+effets		+"' ,"
+				+"'"+ContreIndic+"' ,"
+				+"'"+prixEchant	+"' );";
+		
+		if(!familleExsiste(codeFamille)){
+			creerFamille(codeFamille, medicament.getLibellefamille());
 		}
+		
+		try {
+			retourVal = ConnexionMySql.execReqMaj(requete);
+			ConnexionMySql.fermerConnexionBd();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
 		
 		return retourVal;
 	}
@@ -169,6 +167,54 @@ public class MedicamentDao {
 		}
 		
 		return medicaments;
+	}
+	
+	
+	/**
+	 * Retourne si une famille existe
+	 * @param codeFamille
+	 * @return true si existe, false sinon
+	 */
+	public static boolean familleExsiste( String codeFamille ){
+		boolean exist = false;
+		
+		String req = "select * from famille where FAM_CODE = '"+ codeFamille +"';";
+		
+		try {
+			ResultSet res = ConnexionMySql.execReqSelection(req);
+			if(res.next()){
+				exist = true;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return exist;
+	}
+	
+	/**
+	 * Creer une nouvelel famille dans la BDD
+	 * @param codeFamille 
+	 * @param libFamille
+	 * @return 1 si bien passé, 0 sinon
+	 */
+	public static int creerFamille(String codeFamille, String libFamille){
+		int ret = 0;
+		
+		if(!familleExsiste(codeFamille)){
+			String requete = "insert into famille values ("
+					+ "'"+ codeFamille +"',"
+					+ "'"+ libFamille  +"');";
+			try {
+				ret = ConnexionMySql.execReqMaj(requete);
+				ConnexionMySql.fermerConnexionBd();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return ret;
 	}
 
 }
