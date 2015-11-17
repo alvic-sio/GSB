@@ -12,26 +12,25 @@ import java.util.HashMap;
 
 /**
  * @author Isabelle
- * 22 févr. 2015
- * TODO Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre - Préférences - Java - Style de code - Modèles de code
+ * 22 fï¿½vr. 2015
+ * TODO Pour changer le modï¿½le de ce commentaire de type gï¿½nï¿½rï¿½, allez ï¿½ :
+ * Fenï¿½tre - Prï¿½fï¿½rences - Java - Style de code - Modï¿½les de code
  */
 public class MedecinDao {
 	
 	public static Medecin rechercher(String codeMedecin){
 		Medecin unMedecin=null;
-		String req = "select * from medecin,localite where medecin.CODEPOSTAL = localite.CODEPOSTAL and CODEMED ='"+codeMedecin+"'";
-		System.out.println(req);
+		String req = "select * from MEDECIN,LOCALITE where MEDECIN.CODEPOSTAL = LOCALITE.CODEPOSTAL and CODEMED ='"+codeMedecin+"'";
+
 		ResultSet reqSelection = ConnexionMySql.execReqSelection(req);
-				System.out.println();
 		try {
 			if (reqSelection.next()) {
 				unMedecin = new Medecin(reqSelection.getString(1), reqSelection.getString(2), reqSelection.getString(3), reqSelection.getString(4), reqSelection.getString(6), reqSelection.getString(7), reqSelection.getString(8), reqSelection.getString(9), reqSelection.getString(10) );
-			};
-		} catch(Exception e) {
-			System.out.println("erreur reqSelection.next() pour la requête - select * from MEDECIN where CODEMED ='"+codeMedecin+"'");
-			e.printStackTrace();
 			}
+		} catch(Exception e) {
+			System.out.println("erreur reqSelection.next() pour la requï¿½te - select * from MEDECIN where CODEMED ='"+codeMedecin+"'");
+			e.printStackTrace();
+		}
 		ConnexionMySql.fermerConnexionBd();
 		return unMedecin;
 	}
@@ -70,8 +69,8 @@ public class MedecinDao {
 	
 
 	/**
-	 * @param unMedecin permet d’insérer un nouveau enregistrement medecin dans la table Medecin
-	 * @return 1 si l'insertion s'est bien déroulée, 0 sinon
+	 * @param unMedecin permet dï¿½insï¿½rer un nouveau enregistrement medecin dans la table Medecin
+	 * @return 1 si l'insertion s'est bien dï¿½roulï¿½e, 0 sinon
 	 */
 	public static int creer(Medecin unMedecin){
 		
@@ -99,9 +98,9 @@ public class MedecinDao {
 	}
 
 	/**
-	 * @param CODEMED clé de l'enregistrement à supprimer dans la table Medecin
-	 * @return 1 si la suppression s'est bien déroulée, 0 sinon
-	 * methode qui permet de supprime un enregistrement dans la table Medecin correspondant au CODEMED (codemedecin) passé en paramètre
+	 * @param CODEMED clï¿½ de l'enregistrement ï¿½ supprimer dans la table Medecin
+	 * @return 1 si la suppression s'est bien dï¿½roulï¿½e, 0 sinon
+	 * methode qui permet de supprime un enregistrement dans la table Medecin correspondant au CODEMED (codemedecin) passï¿½ en paramï¿½tre
 	 */
 	public static int supprimer(String CODEMED){
 		String requeteSuppression = "delete from MEDECIN where CODEMED='"+CODEMED+"'";
@@ -111,8 +110,8 @@ public class MedecinDao {
 	}
 	/**
 	 * @param Medecin
-	 * @return 1 si la modification s'est bien déroulée, 0 sinon
-	 * methode qui permet de modificer les valeurs d'un enregistrement dans la table Medecin correspondant au CODEMED passé en paramètre
+	 * @return 1 si la modification s'est bien dï¿½roulï¿½e, 0 sinon
+	 * methode qui permet de modificer les valeurs d'un enregistrement dans la table Medecin correspondant au CODEMED passï¿½ en paramï¿½tre
 	 */
 
 	
