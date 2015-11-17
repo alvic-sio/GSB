@@ -10,32 +10,31 @@ import java.util.HashMap;
 
 
 
-
 public class MedecinDao {
 	
 	public static Medecin rechercher(String codeMedecin){
 		Medecin unMedecin=null;
 		/**
-		 *requete de selection d'un medecin et d'une ville se trouvant dans localité
+		 *requete de selection d'un medecin et d'une ville se trouvant dans localitï¿½
 		 */
-		String req = "select * from medecin,localite where medecin.CODEPOSTAL = localite.CODEPOSTAL and CODEMED ='"+codeMedecin+"'";
-		System.out.println(req);
-		//connection a la base de donnée
+		//connection a la base de donnï¿½e
+
+		String req = "select * from MEDECIN,LOCALITE where MEDECIN.CODEPOSTAL = LOCALITE.CODEPOSTAL and CODEMED ='"+codeMedecin+"'";
+
 		ResultSet reqSelection = ConnexionMySql.execReqSelection(req);
-				System.out.println();
 		try {
 			if (reqSelection.next()) {
 				unMedecin = new Medecin(reqSelection.getString(1), reqSelection.getString(2), reqSelection.getString(3), reqSelection.getString(4), reqSelection.getString(6), reqSelection.getString(7), reqSelection.getString(8), reqSelection.getString(9), reqSelection.getString(10) );
-			};
-		} catch(Exception e) {
-			System.out.println("erreur reqSelection.next() pour la requête - select * from MEDECIN where CODEMED ='"+codeMedecin+"'");
-			e.printStackTrace();
 			}
+		} catch(Exception e) {
+			System.out.println("erreur reqSelection.next() pour la requï¿½te - select * from MEDECIN where CODEMED ='"+codeMedecin+"'");
+			e.printStackTrace();
+		}
 		ConnexionMySql.fermerConnexionBd();
 		return unMedecin;
 	}
 	/**
-	 * permet de rechercher un medecin grace au code du medecin passé en paramètre
+	 * permet de rechercher un medecin grace au code du medecin passï¿½ en paramï¿½tre
 	 */
 	public static ArrayList<Medecin> retournerCollectionDesMedecins(){
 		ArrayList<Medecin> collectionDesMedecins = new ArrayList<Medecin>();
@@ -71,8 +70,8 @@ public class MedecinDao {
 	
 
 	/**
-	 * @param unMedecin permet d’insérer un nouveau enregistrement medecin dans la table Medecin
-	 * @return 1 si l'insertion s'est bien déroulée, 0 sinon
+	 * @param unMedecin permet dï¿½insï¿½rer un nouveau enregistrement medecin dans la table Medecin
+	 * @return 1 si l'insertion s'est bien dï¿½roulï¿½e, 0 sinon
 	 */
 	public static int creer(Medecin unMedecin){
 		
@@ -100,9 +99,9 @@ public class MedecinDao {
 	}
 
 	/**
-	 * @param CODEMED clé de l'enregistrement à supprimer dans la table Medecin
-	 * @return 1 si la suppression s'est bien déroulée, 0 sinon
-	 * methode qui permet de supprime un enregistrement dans la table Medecin correspondant au CODEMED (codemedecin) passé en paramètre
+	 * @param CODEMED clï¿½ de l'enregistrement ï¿½ supprimer dans la table Medecin
+	 * @return 1 si la suppression s'est bien dï¿½roulï¿½e, 0 sinon
+	 * methode qui permet de supprime un enregistrement dans la table Medecin correspondant au CODEMED (codemedecin) passï¿½ en paramï¿½tre
 	 */
 	public static int supprimer(String CODEMED){
 		String requeteSuppression = "delete from MEDECIN where CODEMED='"+CODEMED+"'";
