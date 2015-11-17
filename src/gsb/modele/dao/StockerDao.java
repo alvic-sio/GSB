@@ -1,8 +1,10 @@
 package gsb.modele.dao;
 
-import java.sql.ResultSet;
-
 import gsb.modele.Stocker;
+import gsb.modele.Visiteur;
+
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class StockerDao {
 
@@ -69,5 +71,29 @@ public class StockerDao {
 		
 		return exist;
 	}
+	
+	/**
+	 * Renvoit la listes des stock concernant un visiteur
+	 * @param matriculeVisiteur le matricule du visiteur concerné
+	 * @return la liste des stocks, sinon null
+	 */
+	public static ArrayList<Stocker> rechercherStocks( String matriculeVisiteur ){
+		ArrayList<Stocker> stocks = new ArrayList<Stocker>();
+		
+		String requete = "select * from stocker where refVisiteur = '"+matriculeVisiteur+"';";
+		
+		try {
+			ResultSet res = ConnexionMySql.execReqSelection(requete);
+			while(res.next()) {
+				stocks.add(new Stocker(res.getInt(1), VisiteurDao.rechercher(res.getString(2)),
+						MedicamentDao.rechercher(res.getString(3))));
+			}
+		} catch (Exception e) {
+			
+		}
+		
+		return stocks;
+	}
+
 	
 }
