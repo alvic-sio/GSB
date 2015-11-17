@@ -1,6 +1,6 @@
 package gsb.modele;
 
-public class medecin {
+public class Medecin {
 	protected String codeMed ;
 	protected String nom;
 	protected String prenom;
@@ -20,7 +20,7 @@ public class medecin {
 	 * @param potentiel
 	 * @param specialite
 	 */
-	public medecin(String codeMed, String nom, String prenom,
+	public Medecin(String codeMed, String nom, String prenom,
 			String adresse, String telephone,
 			String potentiel, String specialite,String codePostal,String ville) {
 		this.codeMed = codeMed;
@@ -40,7 +40,7 @@ public class medecin {
 		return codeMed;
 	}
 	/**
-	 * @param codeMed codeMed à définir.
+	 * @param codeMed codeMed ï¿½ dï¿½finir.
 	 */
 	public void setCodeMed(String codeMed) {
 		this.codeMed = codeMed;
@@ -52,7 +52,7 @@ public class medecin {
 		return nom;
 	}
 	/**
-	 * @param nom nom à définir.
+	 * @param nom nom ï¿½ dï¿½finir.
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
@@ -64,7 +64,7 @@ public class medecin {
 		return prenom;
 	}
 	/**
-	 * @param prenom prenom à définir.
+	 * @param prenom prenom ï¿½ dï¿½finir.
 	 */
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
@@ -76,7 +76,7 @@ public class medecin {
 		return adresse;
 	}
 	/**
-	 * @param adresse adresse à définir.
+	 * @param adresse adresse ï¿½ dï¿½finir.
 	 */
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
@@ -89,7 +89,7 @@ public class medecin {
 		return telephone;
 	}
 	/**
-	 * @param telephone telephone à définir.
+	 * @param telephone telephone ï¿½ dï¿½finir.
 	 */
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
@@ -101,7 +101,7 @@ public class medecin {
 		return potentiel;
 	}
 	/**
-	 * @param potentiel potentiel à définir.
+	 * @param potentiel potentiel ï¿½ dï¿½finir.
 	 */
 	public void setPotentiel(String potentiel) {
 		this.potentiel = potentiel;
@@ -113,7 +113,7 @@ public class medecin {
 		return specialite;
 	}
 	/**
-	 * @param specialite specialite à définir.
+	 * @param specialite specialite ï¿½ dï¿½finir.
 	 */
 	public void setSpecialite(String specialite) {
 		this.specialite = specialite;
@@ -125,7 +125,7 @@ public class medecin {
 		return codePostal;
 	}
 	/**
-	 * @param String codePostal à définir.
+	 * @param String codePostal ï¿½ dï¿½finir.
 	 */
 	public void setCodePostal(String codePostal){
 		this.codePostal = codePostal;
