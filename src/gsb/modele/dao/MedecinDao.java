@@ -18,7 +18,7 @@ public class MedecinDao {
 		/**
 		 *requete de selection d'un medecin et d'une ville se trouvant dans localité
 		 */
-		String req = "select * from medecin,localite where medecin.CODEPOSTAL = localite.CODEPOSTAL and CODEMED ='"+codeMedecin+"'";
+		String req = "select * from MEDECIN,LOCALITE where MEDECIN.CODEPOSTAL = LOCALITE.CODEPOSTAL and CODEMED ='"+codeMedecin+"'";
 		System.out.println(req);
 		//connection a la base de donnée
 		ResultSet reqSelection = ConnexionMySql.execReqSelection(req);
