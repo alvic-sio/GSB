@@ -72,4 +72,24 @@ public class MedicamentService {
 		
 		return ret;
 	}
+	
+	/**
+	 * Retounre un objet Medicament a partire de sont depotLegal
+	 * @param depotLegal
+	 * @return medic un Medicament
+	 */
+	public static Medicament rechercherMedicament(String depotLegal){
+		Medicament medic = null;
+		
+		try {
+			if(depotLegal == null || depotLegal == ""){
+				throw new Exception("depotLegal null ou vide");
+			}
+			medic = MedicamentDao.rechercher(depotLegal);
+		} catch (Exception e) {
+			System.err.println("Erreur recherche medicament : " + e.getMessage());;
+		}
+		
+		return medic;
+	}
 }
