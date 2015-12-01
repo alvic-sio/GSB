@@ -82,7 +82,7 @@ public class JIFMedicamentListe extends JInternalFrame implements ActionListener
    		if (source == JBafficherFiche){
    			Medicament unMedic = MedicamentDao.rechercher(JTcodeMedicament.getText());
    			if (unMedic!=null){
-//   	   			fenetreContainer.ouvrirFenetre(new JIFMedicamentFiche(unMedic));
+   	   			fenetreContainer.ouvrirFenetre(new JIFMedicamentFiche(unMedic));
    			}
    		}	
 	}

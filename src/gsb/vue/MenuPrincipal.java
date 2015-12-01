@@ -2,8 +2,10 @@ package gsb.vue;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -17,6 +19,8 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 2591453837113855452L;
 
+	private Dimension size;
+	
 	protected JInternalFrame myJInternalFrame;
 	protected JDesktopPane desktopPane;
 	protected JMenuBar mbar;
@@ -33,9 +37,10 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		desktopPane.setBackground(Color.gray);
 		JPanel contentPane = (JPanel) this.getContentPane();
 		contentPane.add(desktopPane, BorderLayout.CENTER);
-
+		
+		size = new Dimension(480, 380);
 		setTitle("GSB");
-		setSize(500, 400);
+		setSize(size);
 
 		// Ajout d'une barre de menus à la fenêtre
 		mbar = new JMenuBar();
@@ -48,9 +53,6 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		mMedecins.add(mC2);
 
 		mMedicaments = new JMenu("Medicaments");
-		JMenuItem mE1 = new JMenuItem("Consultation Medicament");
-		mE1.addActionListener(this); // installation d'un écouteur d'action
-		mMedicaments.add(mE1);
 		JMenuItem mE2 = new JMenuItem("Ajout Medicaments");
 		mE2.addActionListener(this);
 		mMedicaments.add(mE2);
@@ -60,7 +62,6 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 
 		mVisites = new JMenu("Visites");
 		JMenuItem mA1 = new JMenuItem("Consultation Visite");
-		mE1.addActionListener(this); // installation d'un écouteur d'action
 		mVisites.add(mA1);
 		JMenuItem mA2 = new JMenuItem("Ajout Visite");
 		mA2.addActionListener(this);
@@ -102,7 +103,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		myJInternalFrame.setResizable(true);
 		myJInternalFrame.setMaximizable(true);
 		myJInternalFrame.setClosable(true);
-		myJInternalFrame.setSize(480, 380);
+		myJInternalFrame.setSize(size);
 		desktopPane.add(myJInternalFrame);
 	}
 
