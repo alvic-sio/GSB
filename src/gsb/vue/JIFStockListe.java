@@ -3,6 +3,7 @@ package gsb.vue;
 import gsb.modele.Medicament;
 import gsb.modele.Stocker;
 import gsb.modele.dao.StockerDao;
+import gsb.modele.dao.VisiteurDao;
 
 import java.awt.Container;
 import java.awt.Dimension;
@@ -99,7 +100,12 @@ public class JIFStockListe extends JInternalFrame implements ActionListener{
 	 * @param codeVisiteur
 	 */
 	private void fillTable( String codeVisiteur ){
-		ArrayList<Stocker> lesStock = StockerDao.rechercherStocks(codeVisiteur);
+		ArrayList<Stocker> lesStock;
+		if(VisiteurDao.existe(codeVisiteur)){
+			lesStock = StockerDao.rechercherStocks(codeVisiteur);
+		} else {
+			lesStock = StockerDao.getLesStock(10);
+		}
 		fillTable(lesStock);
 	}
 	

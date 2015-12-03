@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -51,12 +52,19 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		mMedecins.add(mC2);
 
 		mMedicaments = new JMenu("Medicaments");
-		JMenuItem mE2 = new JMenuItem("Stock Echantillont");
-		mE2.addActionListener(this);
-		mMedicaments.add(mE2);
+		
 		JMenuItem mE3 = new JMenuItem("Liste Medicaments");
 		mE3.addActionListener(this);
 		mMedicaments.add(mE3);
+
+		JMenuItem mE5 = new JMenuItem("Consultation Medicaments");
+		mE5.addActionListener(this);
+		mMedicaments.add(mE5);
+
+		
+		JMenuItem mE2 = new JMenuItem("Stock Echantillont");
+		mE2.addActionListener(this);
+		mMedicaments.add(mE2);
 
 		JMenuItem mE4 = new JMenuItem("Ajout Echantillont");
 		mE4.addActionListener(this);
@@ -97,8 +105,9 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 				ouvrirFenetre(new JIFStockListe());
 			} else if(ChoixOption.equals("Ajout Echantillont")){
 				ouvrirFenetre(new JIFAjoutStock(this));
+			} else if(ChoixOption.equals("Consultation Medicaments")){
+				ouvrirFenetre(new JIFMedicamentCons());
 			}
-
 
 		}
 
