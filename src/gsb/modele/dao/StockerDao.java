@@ -95,5 +95,30 @@ public class StockerDao {
 		return stocks;
 	}
 
+	/**
+	 * Retourne la liste des stocks
+	 * @param max le nombre de stock max à renvoyer
+	 * @return la liste des stocks
+	 */
+	public static ArrayList<Stocker> getLesStock( int max ){
+		if(max < 0){
+			max = 0;
+		}
+		ArrayList<Stocker> stocks = new ArrayList<Stocker>();
+		
+		String requete = "select * from stocker LIMIT "+ max +";";
+		
+		try {
+			ResultSet res = ConnexionMySql.execReqSelection(requete);
+			while(res.next()) {
+				stocks.add(new Stocker(res.getInt(1), VisiteurDao.rechercher(res.getString(2)),
+						MedicamentDao.rechercher(res.getString(3))));
+			}
+		} catch (Exception e) {
+			
+		}
+		
+		return stocks;
+	}
 	
 }

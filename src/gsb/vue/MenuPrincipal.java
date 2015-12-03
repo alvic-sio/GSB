@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyVetoException;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -19,7 +18,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 2591453837113855452L;
 
-	private Dimension size;
+	public static final Dimension SIZE = new Dimension(480, 380);
 	
 	protected JInternalFrame myJInternalFrame;
 	protected JDesktopPane desktopPane;
@@ -38,9 +37,8 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		JPanel contentPane = (JPanel) this.getContentPane();
 		contentPane.add(desktopPane, BorderLayout.CENTER);
 		
-		size = new Dimension(480, 380);
 		setTitle("GSB");
-		setSize(size);
+		setSize(SIZE);
 
 		// Ajout d'une barre de menus à la fenêtre
 		mbar = new JMenuBar();
@@ -53,7 +51,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		mMedecins.add(mC2);
 
 		mMedicaments = new JMenu("Medicaments");
-		JMenuItem mE2 = new JMenuItem("Ajout Medicaments");
+		JMenuItem mE2 = new JMenuItem("Stock Echantillont");
 		mE2.addActionListener(this);
 		mMedicaments.add(mE2);
 		JMenuItem mE3 = new JMenuItem("Liste Medicaments");
@@ -72,6 +70,8 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		mbar.add(mVisites);
 		setJMenuBar(mbar);
 		this.setVisible(true);
+		this.setResizable(false);
+		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
@@ -89,7 +89,10 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 				ouvrirFenetre(new JIFMedecinListeCol(this));
 			} else if(ChoixOption.equals("Liste Medicaments")){
 				ouvrirFenetre(new JIFMedicamentListe(this));
+			} else if(ChoixOption.equals("Stock Echantillont")){
+				ouvrirFenetre(new JIFStockListe());
 			}
+
 
 		}
 
@@ -103,7 +106,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		myJInternalFrame.setResizable(true);
 		myJInternalFrame.setMaximizable(true);
 		myJInternalFrame.setClosable(true);
-		myJInternalFrame.setSize(size);
+		myJInternalFrame.setSize(SIZE);
 		desktopPane.add(myJInternalFrame);
 	}
 
