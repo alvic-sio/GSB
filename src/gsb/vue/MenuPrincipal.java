@@ -58,6 +58,10 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		mE3.addActionListener(this);
 		mMedicaments.add(mE3);
 
+		JMenuItem mE4 = new JMenuItem("Ajout Echantillont");
+		mE4.addActionListener(this);
+		mMedicaments.add(mE4);
+		
 		mVisites = new JMenu("Visites");
 		JMenuItem mA1 = new JMenuItem("Consultation Visite");
 		mVisites.add(mA1);
@@ -91,6 +95,8 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 				ouvrirFenetre(new JIFMedicamentListe(this));
 			} else if(ChoixOption.equals("Stock Echantillont")){
 				ouvrirFenetre(new JIFStockListe());
+			} else if(ChoixOption.equals("Ajout Echantillont")){
+				ouvrirFenetre(new JIFAjoutStock(this));
 			}
 
 

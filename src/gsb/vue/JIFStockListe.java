@@ -34,7 +34,8 @@ public class JIFStockListe extends JInternalFrame implements ActionListener{
 	
 	protected GridBagConstraints gridConst;
 	
-	public JIFStockListe(){
+	public JIFStockListe( String matricule ){
+		
 		p = new JPanel(new GridBagLayout());
 		gridConst = new GridBagConstraints();
 		
@@ -43,7 +44,6 @@ public class JIFStockListe extends JInternalFrame implements ActionListener{
 		JBrechercher = new JButton("Rechercher");
 		JTBLlisteStock = new JTable();
 		
-		fillTable(StockerDao.getLesStock(10));
 		
 		//	Label code Visiteur
 		gridConst.fill = GridBagConstraints.HORIZONTAL;
@@ -80,8 +80,18 @@ public class JIFStockListe extends JInternalFrame implements ActionListener{
 		JTcodeVisiteur.addActionListener(this);
 		JBrechercher.addActionListener(this);
 		
+		if(matricule == null){
+			fillTable(StockerDao.getLesStock(10));			
+		} else {
+			fillTable(StockerDao.rechercherStocks(matricule));
+		}
+		
 		Container contentPane = getContentPane();
 		contentPane.add(p);
+	}
+	
+	public JIFStockListe(){
+		this(null);
 	}
 	
 	/**
@@ -107,14 +117,15 @@ public class JIFStockListe extends JInternalFrame implements ActionListener{
 			return;
 		}
 		
-		String[] columnNames = {"Code", "Nom","Stock"};
+		String[] columnNames = {"Visiteur", "Code", "Nom","Stock"};
 		tableModel.setColumnIdentifiers(columnNames);
 		for(Stocker stck: lesStock ){
-			String[]data = new String[3];
+			String[]data = new String[4];
 			Medicament unMedic = stck.getUnMedicament();
-			data[0] = unMedic.getDepotLegal();
-			data[1] = unMedic.getNomCommercial();
-			data[2] = String.valueOf(stck.getQteStock());
+			data[0] = stck.getUnVisiteur().getMatricule();
+			data[1] = unMedic.getDepotLegal();
+			data[2] = unMedic.getNomCommercial();
+			data[3] = String.valueOf(stck.getQteStock());
 			
 			tableModel.addRow(data);
 		}

@@ -25,7 +25,7 @@ public class StockerDao {
 		// Update la quantité si stock déjà existant
 		if(existe(unStock)){
 			requete = "update stocker set "
-					+ "qteStock = '"+ qte 					+"' "
+					+ "qteStock = qteStock + '"+ qte 					+"' "
 					+ "where refVisiteur = '" + matriculeVisiteur + "'"
 					+ "and refMedicament = '" + depotLegalmedicament+"'";
 		}

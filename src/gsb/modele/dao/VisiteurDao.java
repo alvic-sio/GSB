@@ -64,5 +64,29 @@ public class VisiteurDao {
 		
 		return nom;
 	}
+	
+	/**
+	 * Retourne si un visiteur existe ou pas
+	 * @param matricule du visiteur
+	 * @return true si existe, false sinon
+	 */
+	public static boolean existe( String matricule ){
+		boolean existe = false;
+		
+		String req = "select * from VISITEUR where MATRICULE='" + matricule + "';";
+		
+		try {
+			ResultSet res = ConnexionMySql.execReqSelection(req);
+			if(res.next()){
+				existe = true;
+			}
+			ConnexionMySql.fermerConnexionBd();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return existe;
+	}
 
 }
