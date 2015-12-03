@@ -38,11 +38,14 @@ public class JIFMedicament  extends JInternalFrame {
 	public JIFMedicament() {
 		p = new JPanel();
 		p.setMaximumSize(this.getPreferredSize());
+		
 		pBoutons = new JPanel();
+		
 		pTexte = new JPanel();
 		pTexte.setMaximumSize(p.getPreferredSize());
 		pTexte.setLayout(new GridLayout(7,2, 10, 0));
 		
+		// Les labels
 		JLdepotLegal 		= new JLabel("Depot legal");
 		JLnomCommercial 	= new JLabel("Nom commercial");
 		JLcomposition 		= new JLabel("Composition");
@@ -51,6 +54,7 @@ public class JIFMedicament  extends JInternalFrame {
 		JLcodeFamille 		= new JLabel("Code famille");
 		JLlibelleFamille 	= new JLabel("Libelle famille");
 
+		// Les champs de texte
 		JTdepotLegal 		= new JTextField(20);
 		JTnomCommercial 	= new JTextField(20);
 		JTcomposition 		= new JTextField(20);
@@ -59,7 +63,7 @@ public class JIFMedicament  extends JInternalFrame {
 		JTcodeFamille 		= new JTextField(20);
 		JTlibelleFamille 	= new JTextField(20);
 		
-		
+		// Ajouts des label et champs de texte dans le panel
 		pTexte.add(JLdepotLegal);
 		pTexte.add(JTdepotLegal);
 		pTexte.add(JLnomCommercial);

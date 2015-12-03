@@ -1,6 +1,7 @@
 package gsb.vue;
 
 import gsb.service.StockerService;
+import gsb.service.Utils;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -39,9 +40,9 @@ public class JIFAjoutStock extends JInternalFrame implements ActionListener{
 		
 		JBajouter = new JButton("Ajouter");
 		
-		JLcodeVisiteur 	= new JLabel("Code Visiteur :", JLabel.LEFT);
-		JLdepotLegal  	= new JLabel("Depot Legal :", JLabel.LEFT);  
-		JLqte  			= new JLabel("Quantité :", JLabel.LEFT);         
+		JLcodeVisiteur 	= new JLabel("Code Visiteur :"	, JLabel.LEFT);
+		JLdepotLegal  	= new JLabel("Depot Legal :"	, JLabel.LEFT);  
+		JLqte  			= new JLabel("Quantité :"		, JLabel.LEFT);         
 
 		JTcodeVisiteur 	= new JTextField(20);
 		JTdepotLegal 	= new JTextField(20);  
@@ -50,6 +51,7 @@ public class JIFAjoutStock extends JInternalFrame implements ActionListener{
 		gridConst.gridx = 0;
 		gridConst.gridy = 0;
 		p.add(JLcodeVisiteur, gridConst );
+		
 		gridConst.gridx = 1;
 		gridConst.gridy = 0;
 		p.add(JTcodeVisiteur, gridConst );
@@ -57,6 +59,7 @@ public class JIFAjoutStock extends JInternalFrame implements ActionListener{
 		gridConst.gridx = 0;
 		gridConst.gridy = 1;
 		p.add(JLdepotLegal, gridConst );
+		
 		gridConst.gridx = 1;
 		gridConst.gridy = 1;
 		p.add(JTdepotLegal, gridConst );
@@ -84,11 +87,19 @@ public class JIFAjoutStock extends JInternalFrame implements ActionListener{
 			String matricule = JTcodeVisiteur.getText();
 			String depotLegal = JTdepotLegal.getText();
 			
-			int status = StockerService.ajouterStock(Integer.parseInt(qte), matricule, depotLegal);
-		
-			if(status == 1){
-				menuPrincipal.ouvrirFenetre(new JIFStockListe(matricule));
+			if(qte != null && !qte.isEmpty()&& 
+					matricule != null && !matricule.isEmpty() &&
+					depotLegal != null && !depotLegal.isEmpty() &&
+					Utils.estUnEntier(qte)){
+				
+				// Redirige vers la liste des stocks si l'ajout s'est bien déroulé
+				int status = StockerService.ajouterStock(Integer.parseInt(qte), matricule, depotLegal);
+				if(status == 1){
+					menuPrincipal.ouvrirFenetre(new JIFStockListe(matricule));
+				}
 			}
+			
+		
 		}
 		
 	}
