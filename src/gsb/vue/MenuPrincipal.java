@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyVetoException;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -34,7 +33,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		myJInternalFrame = new JInternalFrame(); // pour affichage d'une seule
 													// JInternalFrame à la fois
 		desktopPane = new JDesktopPane();
-		desktopPane.setBackground(Color.gray);
+		desktopPane.setBackground(new Color(0xAAAAFF));
 		JPanel contentPane = (JPanel) this.getContentPane();
 		contentPane.add(desktopPane, BorderLayout.CENTER);
 		
@@ -62,11 +61,11 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		mMedicaments.add(mE5);
 
 		
-		JMenuItem mE2 = new JMenuItem("Stock Echantillont");
+		JMenuItem mE2 = new JMenuItem("Stock Echantillons");
 		mE2.addActionListener(this);
 		mMedicaments.add(mE2);
 
-		JMenuItem mE4 = new JMenuItem("Ajout Echantillont");
+		JMenuItem mE4 = new JMenuItem("Ajout Echantillon");
 		mE4.addActionListener(this);
 		mMedicaments.add(mE4);
 		
@@ -101,9 +100,9 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 				ouvrirFenetre(new JIFMedecinListeCol(this));
 			} else if(ChoixOption.equals("Liste Medicaments")){
 				ouvrirFenetre(new JIFMedicamentListe(this));
-			} else if(ChoixOption.equals("Stock Echantillont")){
+			} else if(ChoixOption.equals("Stock Echantillons")){
 				ouvrirFenetre(new JIFStockListe());
-			} else if(ChoixOption.equals("Ajout Echantillont")){
+			} else if(ChoixOption.equals("Ajout Echantillon")){
 				ouvrirFenetre(new JIFAjoutStock(this));
 			} else if(ChoixOption.equals("Consultation Medicaments")){
 				ouvrirFenetre(new JIFMedicamentCons());
@@ -124,5 +123,6 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		myJInternalFrame.setSize(SIZE);
 		desktopPane.add(myJInternalFrame);
 	}
+
 
 }

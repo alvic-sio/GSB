@@ -64,6 +64,7 @@ public class JIFMedicamentListe extends JInternalFrame implements ActionListener
 		JTcodeMedicament.setMaximumSize(JTcodeMedicament.getPreferredSize());
 		JBafficherFiche = new JButton("Afficher Fiche médicament");
 		JBafficherFiche.addActionListener(this);
+		JTcodeMedicament.addActionListener(this);
 		pSaisie.add(JTcodeMedicament);
 		pSaisie.add(JBafficherFiche);
 		p.add(pSaisie);
@@ -77,9 +78,8 @@ public class JIFMedicamentListe extends JInternalFrame implements ActionListener
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		Object source = arg0.getSource();
-   		if (source == JBafficherFiche){
+	public void actionPerformed(ActionEvent event) {
+   		if (event.getSource() == JBafficherFiche  || event.getSource() == this.JTcodeMedicament){
    			Medicament unMedic = MedicamentDao.rechercher(JTcodeMedicament.getText());
    			if (unMedic!=null){
    	   			fenetreContainer.ouvrirFenetre(new JIFMedicamentFiche(unMedic));
