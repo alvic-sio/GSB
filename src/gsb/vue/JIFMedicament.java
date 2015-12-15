@@ -104,6 +104,7 @@ public class JIFMedicament  extends JInternalFrame {
 		
 		JTcodeFamille.setText(unMedicament.getCodeFamille());
 		JTlibelleFamille.setText(unMedicament.getLibellefamille());
+		JTlibelleFamille.setCaretPosition(0);
 	}
 
 	public void viderText() {   

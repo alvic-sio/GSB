@@ -68,17 +68,17 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		JMenuItem mE4 = new JMenuItem("Ajout Echantillon");
 		mE4.addActionListener(this);
 		mMedicaments.add(mE4);
-		
-		mVisites = new JMenu("Visites");
-		JMenuItem mA1 = new JMenuItem("Consultation Visite");
-		mVisites.add(mA1);
-		JMenuItem mA2 = new JMenuItem("Ajout Visite");
-		mA2.addActionListener(this);
-		mVisites.add(mA2);
+//		
+//		mVisites = new JMenu("Visites");
+//		JMenuItem mA1 = new JMenuItem("Consultation Visite");
+//		mVisites.add(mA1);
+//		JMenuItem mA2 = new JMenuItem("Ajout Visite");
+//		mA2.addActionListener(this);
+//		mVisites.add(mA2);
 
 		mbar.add(mMedecins);
 		mbar.add(mMedicaments);
-		mbar.add(mVisites);
+//		mbar.add(mVisites);
 		setJMenuBar(mbar);
 		this.setVisible(true);
 		this.setResizable(false);
